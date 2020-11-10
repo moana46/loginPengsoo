@@ -48,7 +48,7 @@ public class FaceRecognition extends AppCompatActivity {
             uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
-//        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
 //        actionBar.hide();  // 액션바 숨김
 
         WebView webView = (WebView)findViewById(R.id.webView);
@@ -64,21 +64,34 @@ public class FaceRecognition extends AppCompatActivity {
         webView.loadUrl(url);
 
         btnLeftRotate = (ImageButton) findViewById(R.id.btnLeftRotate);
-        btnLeftRotate.setOnClickListener(new View.OnClickListener() {
+        btnLeftRotate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sel = "[Car]LeftRotate";
-
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                    sel = "[Car]LeftRotate";
+                }
+                else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    sel = "[Car]Stop";
+                }
+                return true;
             }
         });
 
         btnRightRotate = (ImageButton) findViewById(R.id.btnRightRotate);
-        btnRightRotate.setOnClickListener(new View.OnClickListener() {
+        btnRightRotate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sel = "[Car]RightRotate";
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                    sel = "[Car]RightRotate";
+                }
+                else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    sel = "[Car]Stop";
+                }
+                return true;
             }
         });
+
+
 
         joystick_bg =findViewById(R.id.joystick_bg);
         js = new com.example.loginpengsoo.JoyStickClass(getApplicationContext(), joystick_bg, R.drawable.joystick);
@@ -97,7 +110,6 @@ public class FaceRecognition extends AppCompatActivity {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
 
-                mSendData = new SendData();
                 js.drawStick(arg1);
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
@@ -140,14 +152,18 @@ public class FaceRecognition extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        MoveCar movecar = new MoveCar();
         switch (item.getItemId()) {
             case R.id.menuVoice:
-                //mSendData.setStr("[PS]Speak");
-                //mSendData.start();
+                sel = "[PS]Speak";
                 return true;
             case R.id.menuAuto:
                 return true;
-            case R.id.menuManual:
+            case R.id.menuManual:closeContextMenu();
+                return true;
+            case R.id.menuTest:
+                sel = "[Car]Test";
+                movecar.start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -179,7 +195,12 @@ public class FaceRecognition extends AppCompatActivity {
                     if (sel == "[Car]Stop") {
                         mSendData.start();
                         sel = "Stop";
-                    } else if (sel == "Stop") {
+                    }
+                    else if(sel == "[PS]Speak"){
+                        mSendData.start();
+                        sel = "Stop";
+                    }
+                    else if (sel == "Stop") {
                         Thread.yield();
                     } else {
                         mSendData.start();
