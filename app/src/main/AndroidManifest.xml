@@ -17,7 +17,7 @@
             android:screenOrientation="landscape"
             />//화면을 landscape(가로) 화면으로 고정
         <activity android:name=".MainActivity"
-                  android:screenOrientation="reverseLandscape">
+                  android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
