@@ -26,7 +26,7 @@ public class FaceRecognition extends AppCompatActivity {
     ImageButton btnLeftRotate, btnRightRotate;
     FrameLayout joystick_bg;
 
-    public static final String IP = "192.168.0.139";
+    public static final String IP = "192.168.0.47";
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
@@ -64,21 +64,34 @@ public class FaceRecognition extends AppCompatActivity {
         webView.loadUrl(url);
 
         btnLeftRotate = (ImageButton) findViewById(R.id.btnLeftRotate);
-        btnLeftRotate.setOnClickListener(new View.OnClickListener() {
+        btnLeftRotate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sel = "[Car]LeftRotate";
-
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                    sel = "[Car]LeftRotate";
+                }
+                else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    sel = "[Car]Stop";
+                }
+                return true;
             }
         });
 
         btnRightRotate = (ImageButton) findViewById(R.id.btnRightRotate);
-        btnRightRotate.setOnClickListener(new View.OnClickListener() {
+        btnRightRotate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sel = "[Car]RightRotate";
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                    sel = "[Car]RightRotate";
+                }
+                else if (event.getAction()==MotionEvent.ACTION_UP) {
+                    sel = "[Car]Stop";
+                }
+                return true;
             }
         });
+
+
 
         joystick_bg =findViewById(R.id.joystick_bg);
         js = new com.example.loginpengsoo.JoyStickClass(getApplicationContext(), joystick_bg, R.drawable.joystick);
@@ -97,7 +110,6 @@ public class FaceRecognition extends AppCompatActivity {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
 
-                mSendData = new SendData();
                 js.drawStick(arg1);
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
