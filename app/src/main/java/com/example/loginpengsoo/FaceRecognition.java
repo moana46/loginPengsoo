@@ -26,7 +26,7 @@ public class FaceRecognition extends AppCompatActivity {
     ImageButton btnLeftRotate, btnRightRotate;
     FrameLayout joystick_bg;
 
-    public static final String IP = "192.168.0.47";
+    public static final String IP = "192.168.0.139";
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
@@ -48,7 +48,7 @@ public class FaceRecognition extends AppCompatActivity {
             uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
-//        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
 //        actionBar.hide();  // 액션바 숨김
 
         WebView webView = (WebView)findViewById(R.id.webView);
@@ -152,14 +152,18 @@ public class FaceRecognition extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        MoveCar movecar = new MoveCar();
         switch (item.getItemId()) {
             case R.id.menuVoice:
-                //mSendData.setStr("[PS]Speak");
-                //mSendData.start();
+                sel = "[PS]Speak";
                 return true;
             case R.id.menuAuto:
                 return true;
-            case R.id.menuManual:
+            case R.id.menuManual:closeContextMenu();
+                return true;
+            case R.id.menuTest:
+                sel = "[Car]Test";
+                movecar.start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -191,7 +195,12 @@ public class FaceRecognition extends AppCompatActivity {
                     if (sel == "[Car]Stop") {
                         mSendData.start();
                         sel = "Stop";
-                    } else if (sel == "Stop") {
+                    }
+                    else if(sel == "[PS]Speak"){
+                        mSendData.start();
+                        sel = "Stop";
+                    }
+                    else if (sel == "Stop") {
                         Thread.yield();
                     } else {
                         mSendData.start();

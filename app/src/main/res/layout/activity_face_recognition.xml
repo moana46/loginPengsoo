@@ -18,8 +18,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginTop="67dp"
-            android:layout_marginBottom="133dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="120dp">
 
         </WebView>
 
