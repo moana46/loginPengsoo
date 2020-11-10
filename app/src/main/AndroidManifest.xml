@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPengsoo">
-        <activity android:name=".FaceRecognition" />
+        <activity
+            android:name=".FaceRecognition"
+            android:screenOrientation="landscape"
+            />//화면을 landscape(가로) 화면으로 고정
         <activity android:name=".MainActivity"
                   android:screenOrientation="reverseLandscape">
             <intent-filter>
