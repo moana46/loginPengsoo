@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/menuVoice"
-        android:title="음성인식" />
+        android:title="음성인식"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menuAuto"
         android:title="자동주행" />
@@ -13,5 +14,6 @@
         android:title="수동주행" />
     <item
         android:id="@+id/menuTest"
-        android:title="테스트" />
+        android:title="테스트"
+        app:showAsAction="always"/>
 </menu>

@@ -5,8 +5,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +18,9 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -30,7 +35,7 @@ public class FaceRecognition extends AppCompatActivity {
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
-    String sel="[Car]Stop";
+    public String sel="[Car]Stop";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -152,22 +157,31 @@ public class FaceRecognition extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        MoveCar movecar = new MoveCar();
+        boolean ret = false;
+//        MoveCarTest moveCarTest = new MoveCarTest();
+        SendData mSendDataTest = new SendData();
+
         switch (item.getItemId()) {
             case R.id.menuVoice:
                 sel = "[PS]Speak";
-                return true;
+                mSendDataTest.start();
+                break;
             case R.id.menuAuto:
-                return true;
-            case R.id.menuManual:closeContextMenu();
-                return true;
+                ret = true;
+                break;
+            case R.id.menuManual:
+                ret = true;
+                break;
             case R.id.menuTest:
                 sel = "[Car]Test";
-                movecar.start();
-                return true;
+                mSendDataTest.start();
+                ret = true;
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+//        moveCarTest.start();
+        return ret;
     }
 
     class SendData extends Thread{
@@ -186,32 +200,30 @@ public class FaceRecognition extends AppCompatActivity {
         }
     }
 //무한반복 보내기 클래스
-    class MoveCar extends Thread{
-        public void run() {
-            while(true){
-                try {
-                    mSendData = new SendData();
-                    Thread.sleep(100);
-                    if (sel == "[Car]Stop") {
+    class MoveCar extends Thread {
+    public void run() {
+        while (true) {
+            try {
+                mSendData = new SendData();
+                Thread.sleep(500);
+                if (sel == "[Car]Stop") {
+                    mSendData.start();
+                    sel = "Stop";
+                }
+                    else if(sel == "[PS]Speak" || sel == "[Car]Test"){
                         mSendData.start();
                         sel = "Stop";
                     }
-                    else if(sel == "[PS]Speak"){
-                        mSendData.start();
-                        sel = "Stop";
-                    }
-                    else if (sel == "Stop") {
-                        Thread.yield();
-                    } else {
-                        mSendData.start();
-                    }
+                else if (sel == "Stop") {
+                    Thread.yield();
+                } else {
+                    mSendData.start();
                 }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
-
+}
 
 }
