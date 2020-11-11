@@ -159,12 +159,10 @@ public class FaceRecognition extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         boolean ret = false;
 //        MoveCarTest moveCarTest = new MoveCarTest();
-        SendData mSendDataTest = new SendData();
 
         switch (item.getItemId()) {
             case R.id.menuVoice:
                 sel = "[PS]Speak";
-                mSendDataTest.start();
                 break;
             case R.id.menuAuto:
                 ret = true;
@@ -174,7 +172,6 @@ public class FaceRecognition extends AppCompatActivity {
                 break;
             case R.id.menuTest:
                 sel = "[Car]Test";
-                mSendDataTest.start();
                 ret = true;
                 break;
             default:
@@ -205,19 +202,22 @@ public class FaceRecognition extends AppCompatActivity {
         while (true) {
             try {
                 mSendData = new SendData();
-                Thread.sleep(500);
                 if (sel == "[Car]Stop") {
                     mSendData.start();
+                    Thread.sleep(500);
                     sel = "Stop";
                 }
-                    else if(sel == "[PS]Speak" || sel == "[Car]Test"){
-                        mSendData.start();
-                        sel = "Stop";
+                else if(sel == "[PS]Speak" || sel == "[Car]Test"){
+                    mSendData.start();
+                    Thread.sleep(500);
+                    sel = "Stop";
                     }
                 else if (sel == "Stop") {
                     Thread.yield();
+                    Thread.sleep(500);
                 } else {
                     mSendData.start();
+                    Thread.sleep(500);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
