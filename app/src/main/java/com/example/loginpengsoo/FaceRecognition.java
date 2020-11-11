@@ -198,10 +198,10 @@ public class FaceRecognition extends AppCompatActivity {
     }
 //무한반복 보내기 클래스
     class MoveCar extends Thread {
+    int delay = 500;
     public void run() {
         while (true) {
             try {
-                int delay = 100;
                 mSendData = new SendData();
                 if (sel == "[Car]Stop") {
                     mSendData.start();
