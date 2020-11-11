@@ -3,10 +3,12 @@ package com.example.loginpengsoo;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -38,6 +40,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
+            }
+
+
+        });
+        loginButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Context context = getBaseContext();
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    loginButton.setBackgroundColor(context.getResources().getColor(R.color.green_press));
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP){
+                    loginButton.setBackgroundColor(context.getResources().getColor(R.color.green));
+                }
+                return false;
             }
         });
     }
