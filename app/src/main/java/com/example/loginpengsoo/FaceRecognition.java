@@ -31,7 +31,7 @@ public class FaceRecognition extends AppCompatActivity {
     ImageButton btnLeftRotate, btnRightRotate;
     FrameLayout joystick_bg;
 
-    public static final String IP = "192.168.0.139";
+    public static final String IP = "192.168.0.59";
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
@@ -65,7 +65,7 @@ public class FaceRecognition extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
         //webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
-        String url ="http://192.168.0.139:8090/?action=stream";
+        String url ="http://192.168.0.59:8090/?action=stream";
         webView.loadUrl(url);
 
         btnLeftRotate = (ImageButton) findViewById(R.id.btnLeftRotate);
