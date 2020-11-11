@@ -201,23 +201,24 @@ public class FaceRecognition extends AppCompatActivity {
     public void run() {
         while (true) {
             try {
+                int delay = 100;
                 mSendData = new SendData();
                 if (sel == "[Car]Stop") {
                     mSendData.start();
-                    Thread.sleep(500);
+                    Thread.sleep(delay);
                     sel = "Stop";
                 }
                 else if(sel == "[PS]Speak" || sel == "[Car]Test"){
                     mSendData.start();
-                    Thread.sleep(500);
+                    Thread.sleep(delay);
                     sel = "Stop";
                     }
                 else if (sel == "Stop") {
                     Thread.yield();
-                    Thread.sleep(500);
+                    Thread.sleep(delay);
                 } else {
                     mSendData.start();
-                    Thread.sleep(500);
+                    Thread.sleep(delay);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
