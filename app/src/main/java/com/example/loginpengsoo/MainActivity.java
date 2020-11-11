@@ -13,6 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
 public class MainActivity extends AppCompatActivity {
 
     Button loginButton;
@@ -32,19 +39,19 @@ public class MainActivity extends AppCompatActivity {
         actionBar.hide();  // 액션바 숨김
 
         loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FaceRecognition.class);
-                startActivity(intent);
-
-
-            }
-
-
-        });
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, FaceRecognition.class);
+//                startActivity(intent);
+//            }
+//        });
         loginButton.setOnTouchListener(new View.OnTouchListener() {
+
+            public String message="[PS]Login";
+
+
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Context context = getBaseContext();
@@ -53,6 +60,22 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP){
                     loginButton.setBackgroundColor(context.getResources().getColor(R.color.green));
+                    Intent intent = new Intent(MainActivity.this, FaceRecognition.class);
+                    startActivity(intent);
+
+                    try {
+                        DatagramSocket socket = new DatagramSocket();
+                        InetAddress serverAddr = InetAddress.getByName(FaceRecognition.IP);
+                        byte[] buf = (message).getBytes();
+                        DatagramPacket packet = new DatagramPacket(buf, buf.length, serverAddr, FaceRecognition.PORT);
+                        socket.send(packet);
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
                 return false;
             }
