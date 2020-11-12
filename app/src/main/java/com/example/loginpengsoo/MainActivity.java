@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP){
                     loginButton.setBackgroundColor(context.getResources().getColor(R.color.green));
-                    Intent intent = new Intent(MainActivity.this, FaceRecognition.class);
-                    startActivity(intent);
-
                     try {
                         DatagramSocket socket = new DatagramSocket();
                         InetAddress serverAddr = InetAddress.getByName(FaceRecognition.IP);
@@ -76,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch(Exception e){
                         e.printStackTrace();
                     }
+                    Intent intent = new Intent(MainActivity.this, FaceRecognition.class);
+                    startActivity(intent);
                 }
                 return false;
             }
