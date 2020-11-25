@@ -65,7 +65,7 @@ public class FaceRecognition extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
         //webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
-        String url ="http://192.168.0.55:8090/?action=stream";
+        String url ="http://192.168.0.43:8090/?action=stream";
         webView.loadUrl(url);
 
         btnLeftRotate = (ImageButton) findViewById(R.id.btnLeftRotate);
