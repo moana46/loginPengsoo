@@ -163,22 +163,23 @@ public class FaceRecognition extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuVoice:
                 sel = "[PS]Speak";
+                ret = true;
                 break;
             case R.id.menuTest:
                 sel = "[Car]Test";
                 ret = true;
                 break;
             case R.id.menuAvoid:
-                ret = true;
                 sel = "[Car]Avoid";
+                ret = true;
                 break;
             case R.id.menuDetect:
-                ret = true;
                 sel = "[Car]Detect";
+                ret = true;
                 break;
             case R.id.menuMap:
-                ret = true;
                 sel = "[Car]Map";
+                ret = true;
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -213,7 +214,7 @@ public class FaceRecognition extends AppCompatActivity {
                     Thread.sleep(delay);
                     sel = "Stop";
                 }
-                else if(sel == "[PS]Speak" || sel == "[Car]Test"){
+                else if(sel == "[PS]Speak" || sel == "[Car]Test" || sel == "[Car]Avoid" || sel == "[Car]Detect" || sel == "[Car]Map" ){
                     mSendData.start();
                     Thread.sleep(delay);
                     sel = "Stop";
