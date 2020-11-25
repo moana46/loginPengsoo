@@ -164,20 +164,25 @@ public class FaceRecognition extends AppCompatActivity {
             case R.id.menuVoice:
                 sel = "[PS]Speak";
                 break;
-            case R.id.menuAuto:
-                ret = true;
-                break;
-            case R.id.menuManual:
-                ret = true;
-                break;
             case R.id.menuTest:
                 sel = "[Car]Test";
                 ret = true;
                 break;
+            case R.id.menuAvoid:
+                ret = true;
+                sel = "[Car]Avoid";
+                break;
+            case R.id.menuDetect:
+                ret = true;
+                sel = "[Car]Detect";
+                break;
+            case R.id.menuMap:
+                ret = true;
+                sel = "[Car]Map";
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-//        moveCarTest.start();
         return ret;
     }
 

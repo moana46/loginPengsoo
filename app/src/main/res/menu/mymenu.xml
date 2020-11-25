@@ -7,13 +7,20 @@
         android:title="음성인식"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/menuAuto"
-        android:title="자동주행" />
-    <item
-        android:id="@+id/menuManual"
-        android:title="수동주행" />
-    <item
         android:id="@+id/menuTest"
         android:title="테스트"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menuAvoid"
+        android:title="장애물 피하기"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menuDetect"
+        android:title="펭수 추적"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menuMap"
+        android:title="매핑"
         app:showAsAction="always"/>
 </menu>
