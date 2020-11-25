@@ -31,7 +31,7 @@ public class FaceRecognition extends AppCompatActivity {
     ImageButton btnLeftRotate, btnRightRotate;
     FrameLayout joystick_bg;
 
-    public static final String IP = "192.168.0.55";
+    public static final String IP = "192.168.0.43";
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
