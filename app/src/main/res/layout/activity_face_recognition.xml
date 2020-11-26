@@ -38,7 +38,7 @@
             android:layout_height="200dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="40dp"
             android:layout_marginBottom="18dp"
             android:background="@drawable/joystick_bg">
 
@@ -50,8 +50,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="400dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="430dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
@@ -83,6 +83,31 @@
                     android:background="@android:color/transparent"
                     app:srcCompat="@drawable/righttrun" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="410dp"
+            android:layout_marginBottom="120dp">
+
+            <TextView
+                android:id="@+id/txtTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:text="26.5"
+                android:textSize="20dp"
+                android:textColor="#18DB0A"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:text=" ºC"
+                android:textSize="20dp"
+                android:textColor="#18DB0A"/>
         </LinearLayout>
 
     </RelativeLayout>

@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
         loginButton.setOnTouchListener(new View.OnTouchListener() {
-
-            public String message="[PS]Login";
-
-
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Context context = getBaseContext();
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         DatagramSocket socket = new DatagramSocket();
                         InetAddress serverAddr = InetAddress.getByName(FaceRecognition.IP);
-                        byte[] buf = (message).getBytes();
+                        byte[] buf = ("[PS]Login").getBytes();
                         DatagramPacket packet = new DatagramPacket(buf, buf.length, serverAddr, FaceRecognition.PORT);
                         socket.send(packet);
                     } catch (UnknownHostException e) {

@@ -18,6 +18,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -30,8 +31,9 @@ public class FaceRecognition extends AppCompatActivity {
 
     ImageButton btnLeftRotate, btnRightRotate;
     FrameLayout joystick_bg;
+    TextView temp;
 
-    public static final String IP = "192.168.0.43";
+    public static final String IP = "14.56.196.121";
     public static final  int PORT = 9999;
     public SendData mSendData = null;
     com.example.loginpengsoo.JoyStickClass js;
@@ -65,7 +67,7 @@ public class FaceRecognition extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
         //webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
-        String url ="http://192.168.0.43:8090/?action=stream";
+        String url ="http://" + IP + ":8090/?action=stream";
         webView.loadUrl(url);
 
         btnLeftRotate = (ImageButton) findViewById(R.id.btnLeftRotate);
@@ -109,6 +111,11 @@ public class FaceRecognition extends AppCompatActivity {
         //무한반복 움직임 쓰레드 생성
         MoveCar movecar = new MoveCar();
         movecar.start();
+
+        temp = findViewById(R.id.txtTemp);
+
+//        Thread sv = new Thread(new Server());
+//        sv.start();
 
         joystick_bg.setOnTouchListener(new View.OnTouchListener() {
 
@@ -195,7 +202,14 @@ public class FaceRecognition extends AppCompatActivity {
                 byte[] buf = (sel).getBytes();
                 DatagramPacket packet = new DatagramPacket(buf,buf.length, serverAddr, PORT);
                 socket.send(packet);    // 송신
+                System.out.println("server - sent");
 
+                //데이터 수신 대기
+                socket.receive(packet);
+                //데이터 수신되었다면 문자열로 변환
+                String msg = new String(packet.getData());
+                System.out.println("server - " + msg);
+                temp.setText(msg);
             }
             catch(Exception e){
                 e.printStackTrace();
